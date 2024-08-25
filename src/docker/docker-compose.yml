@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_Contaner
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: my_database
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5032:5032"
+    networks:
+      - webapinetwork
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin:
+  redis:
+  logs:
+
+  networks:
+  webapinetwork:
+   driver: bridge
+   
