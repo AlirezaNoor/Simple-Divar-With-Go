@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+ 
+	api "project/Apis"
+)
 
 func main() {
 
-	fmt.Println("Starting")
+api.InternalServer()
 }

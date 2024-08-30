@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   postgres:
@@ -16,6 +16,21 @@ services:
     networks:
       - webapinetwork
     restart: unless-stopped
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_Container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "8090:80"
+    networks:
+      - webapinetwork
+    restart: unless-stopped
+    depends_on:
+      - postgres
 
 volumes:
   postgres:
@@ -23,7 +38,8 @@ volumes:
   redis:
   logs:
 
-  networks:
+networks:
   webapinetwork:
-   driver: bridge
+    driver: bridge
+
    
