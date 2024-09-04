@@ -1,20 +1,23 @@
 package api
 
 import (
-	"net/http"
+ 	"project/Apis/routers"
 
 	"github.com/gin-gonic/gin"
 )
 
-func InternalServer(){
-	r :=gin.New()
-	r.Use(gin.logger(),gin.Recovery())
-	v1 :=r.Group("/api/v1")
+func InternalServer() {
+	r := gin.New()
+	r.Use(gin.Logger(), gin.Recovery())
+	v1 := r.Group("/api/v1")
 	{
-		v1.GET("/healthChecker", func (c *gin.Context)  {
-			c.JSON(http.StatusOK,"Working")
-			return
-		})
+		// v1.GET("/healthChecker", func(c *gin.Context) {
+		// 	c.JSON(http.StatusOK, "Working")
+		// 	return
+		// })
+			health:=v1.Group("/health")
+
+			routers.Health(health) 
 	}
-r.Run("5005")
+	r.Run(":5005")
 }
